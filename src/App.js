@@ -3,8 +3,12 @@ import logo from './logo.svg';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Icon } from 'antd';
+import Profile from './components/Profile';
+import './App.css'
+
 
 const { Header, Content, Footer, Sider } = Layout;
+
 
 class App extends Component {
 
@@ -13,7 +17,7 @@ class App extends Component {
     user_data:null
     ,repo_data:[]
     ,events_data:[]
-    ,folowers_data:[]
+    ,followers_data:[]
     ,following_data:[]
 
   }
@@ -71,9 +75,10 @@ class App extends Component {
       axios.get(`https://api.github.com/users/${userName}/followers`)
       .then((res)=>{
         this.setState({
-          folowers_data: res.data.map(follower=>({
+          followers_data: res.data.map(follower=>({
             html_url:follower.html_url
             ,avatar_url:follower.avatar_url
+            ,login:follower.login           
           }))
         })
       })
@@ -88,6 +93,7 @@ class App extends Component {
           following_data: res.data.map(following=>({
             html_url:following.html_url
             ,avatar_url:following.avatar_url
+            
           }))
         })
       })
@@ -123,9 +129,14 @@ class App extends Component {
         <Layout style={{ marginLeft: 200,height:'100vh' }}>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>
-              
-              content
+            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>            
+              <Profile
+              user_data={this.state.user_data}
+              events_data={this.state.events_data}
+              repo_data={this.state.repo_data}
+              followers_data={this.state.followers_data}
+              following_data={this.state.following_data}
+              ></Profile>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
