@@ -7,7 +7,9 @@ import { Spin } from 'antd'
 
 class Profile extends Component {
     render() {
-        const {user_data,events_data,followers_data,following_data}= this.props
+        const {user_data,events_data
+            ,followers_data
+            ,following_data}= this.props
         
         {console.log(this.props)}
         return (

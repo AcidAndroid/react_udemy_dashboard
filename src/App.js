@@ -5,7 +5,8 @@ import 'antd/dist/antd.css';
 import { Layout, Menu, Icon } from 'antd';
 import Profile from './components/Profile';
 import './App.css'
-
+import Repo from './components/Repo';
+import { Switch,Route,Link,BrowserRouter as Router } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -111,32 +112,52 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
       <Layout>
         <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} style={{marginTop:'50px'}} >
+          
             <Menu.Item key="1">
-              <Icon type="user" />
-              <span className="nav-text">Profile</span>
+              <Link to='/'>
+                <Icon type="user" />
+                <span className="nav-text">Profile</span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="code" />
-              <span className="nav-text">All repositories</span>
+              <Link to='repo'>
+                  <Icon type="code" />
+                  <span className="nav-text">All repositories</span>
+              </Link>
             </Menu.Item>
-            
+           
           </Menu>
         </Sider>
         <Layout style={{ marginLeft: 200,height:'100vh' }}>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>            
-              <Profile
-              user_data={this.state.user_data}
-              events_data={this.state.events_data}
-              repo_data={this.state.repo_data}
-              followers_data={this.state.followers_data}
-              following_data={this.state.following_data}
-              ></Profile>
+            <Switch>
+              <Route
+              exact path='/'
+              render={()=> 
+                <Profile
+                  user_data={this.state.user_data}
+                  events_data={this.state.events_data}
+                  repo_data={this.state.repo_data}
+                  followers_data={this.state.followers_data}
+                  following_data={this.state.following_data}
+                  ></Profile>}
+              />
+              <Route
+              exact path='/repo'
+              render={()=> 
+                <Repo                
+                repo_data={this.state.repo_data}
+                />}
+              />
+            </Switch>
+              
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
@@ -144,6 +165,7 @@ class App extends Component {
           </Footer>
         </Layout>
       </Layout>
+      </Router>
     );
   }
 }
