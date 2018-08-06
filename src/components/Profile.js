@@ -6,6 +6,8 @@ import { Spin } from 'antd'
 
 
 class Profile extends Component {
+
+   
     render() {
         const {user_data,events_data
             ,followers_data
@@ -40,7 +42,7 @@ class Profile extends Component {
                             <List
                                 itemLayout="horizontal"
                                 dataSource={events_data}
-                                pagination={{pageSize:10}}
+                                pagination={{pageSize:3}}
                                 renderItem={item => (
                                 <List.Item>
                                     <List.Item.Meta                                
@@ -79,10 +81,10 @@ class Profile extends Component {
                                 dataSource={following_data}
                                 pagination={{pageSize:5}}
                                 renderItem={item => (
-                                <List.Item>
-                                    <List.Item.Meta
+                                    <List.Item>
+                                    <List.Item.Meta                                        
                                         avatar={<Avatar src={item.avatar_url}/>}
-                                        title={<a href={item.html_url}>{item.login}</a>}                                    
+                                        title={<a href={item.html_url}>{item.html_url}</a>}                                    
                                     />
                                 </List.Item>
                                 )}

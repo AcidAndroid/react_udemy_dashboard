@@ -7,9 +7,12 @@ import Profile from './components/Profile';
 import './App.css'
 import Repo from './components/Repo';
 import { Switch,Route,Link,BrowserRouter as Router } from "react-router-dom";
+import { Input } from 'antd';
+
+
 
 const { Header, Content, Footer, Sider } = Layout;
-
+const Search = Input.Search;
 
 class App extends Component {
 
@@ -106,7 +109,7 @@ class App extends Component {
 
 
   componentDidMount(){
-    this.fetchData('donfour')
+    // this.fetchData('donfour')
     // this.fetchData('acidandroid')
   }
 
@@ -134,9 +137,16 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout style={{ marginLeft: 200,height:'100vh' }}>
-          <Header style={{ background: '#fff', padding: 0 }} />
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Search
+                className="search-box"
+                placeholder="input github user name"
+                onSearch={value => this.fetchData(value)}
+                enterButton
+              />
+          </Header>
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-            <div style={{ padding: 24, background: '#fff', textAlign: 'center' }}>            
+            <div style={{ padding: 24, background: '#fff', textAlign: 'justify' }}>            
             <Switch>
               <Route
               exact path='/'
@@ -160,7 +170,7 @@ class App extends Component {
               
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
+          <Footer style={{ textAlign: 'justify' }}>
             Ant Design ©2016 Created by Ant UED
           </Footer>
         </Layout>
