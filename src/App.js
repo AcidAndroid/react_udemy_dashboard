@@ -35,7 +35,7 @@ class App extends Component {
       .then((res)=>{
         this.setState(
           {user_data:{
-              name:res.data.name||'No NAME'
+              name:res.data.name || res.data.login ||'No NAME'
               ,bio:res.data.bio||'NO BIO'
               ,avatar_url:res.data.avatar_url
               ,login:res.data.login
@@ -112,7 +112,7 @@ class App extends Component {
 
 
   componentDidMount(){
-    // this.fetchData('donfour')
+    this.fetchData('donfour')
     // this.fetchData('acidandroid')
   }
 
@@ -131,18 +131,18 @@ class App extends Component {
           <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
             <div style={{ padding: 24, background: '#fff', textAlign: 'justify' }}>            
             <Main
-            user_data={this.state.user_data}
-            events_data={this.state.events_data}
-            repo_data={this.state.repo_data}
-            followers_data={this.state.followers_data}
-            following_data={this.state.following_data}
-            repo_data={this.state.repo_data}
+              user_data={this.state.user_data}
+              events_data={this.state.events_data}
+              repo_data={this.state.repo_data}
+              followers_data={this.state.followers_data}
+              following_data={this.state.following_data}
+              repo_data={this.state.repo_data}
             ></Main>
               
             </div>
           </Content>
           <Footer style={{ textAlign: 'justify' }}>
-            Ant Design ©2016 Created by Ant UED
+            Ejemplo de uso de API de Github. Creado por Acid Android
           </Footer>
         </Layout>
       </Layout>

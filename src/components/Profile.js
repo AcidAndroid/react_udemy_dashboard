@@ -6,14 +6,48 @@ import { Spin } from 'antd'
 
 
 class Profile extends Component {
+    renderEventItems(item){
+        return(<List.Item>
+                <List.Item.Meta                                
+                title={item.type}
+                description={item.repo.name}
+                />
+               </List.Item>
+        )
+    }
 
+    renderUserItems(item){        
+        return(
+            <List.Item>
+            <List.Item.Meta
+                avatar={<Avatar src={item.avatar_url}/>}
+                title={<a href={item.html_url}>{item.login||item.html_url}</a>}                                    
+            />
+            </List.Item>
+        )
+    }
+    
+    renderColumn(title,dataSource,renderItemFunc){
+        return(
+            <Col span={8}>
+                <Card title={title} >                                  
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={dataSource}
+                        pagination={{pageSize:3}}
+                        renderItem={renderItemFunc}
+                    />                    
+                </Card>
+            </Col>
+        )
+    }
    
     render() {
         const {user_data,events_data
             ,followers_data
             ,following_data}= this.props
         
-        {console.log(this.props)}
+        // {console.log(this.props)}
         return (
             <React.Fragment>
 
@@ -36,26 +70,24 @@ class Profile extends Component {
 
                
                 <Row gutter={16}>
-                    <Col span={8}>
-                        <Card title="Actividades recientes" >                  
+                        {
+                            this.renderColumn("Actividades recientes"
+                            ,events_data
+                            ,this.renderEventItems)
+                        }
+                    
+                        {
+                            this.renderColumn("Seguidores"
+                            ,followers_data
+                            ,this.renderUserItems)
+                        }
+                        {
+                            this.renderColumn("Siguiendo"
+                            ,following_data
+                            ,this.renderUserItems)
+                        }
+                    {/* <Col span={8}>
                         
-                            <List
-                                itemLayout="horizontal"
-                                dataSource={events_data}
-                                pagination={{pageSize:3}}
-                                renderItem={item => (
-                                <List.Item>
-                                    <List.Item.Meta                                
-                                    title={item.type}
-                                    description={item.repo.name}
-                                    />
-                                </List.Item>
-                                )}
-                            />
-                            
-                        </Card>
-                    </Col>
-                    <Col span={8}>
                         <Card title="Seguidores" >
                         
                             <List
@@ -73,8 +105,8 @@ class Profile extends Component {
                             />
 
                         </Card>
-                    </Col>
-                    <Col span={8}>
+                    </Col> */}
+                    {/* <Col span={8}>
                         <Card title="Siguiendo" >
                             <List
                                 itemLayout="horizontal"
@@ -90,7 +122,7 @@ class Profile extends Component {
                                 )}
                             />
                         </Card>
-                    </Col>
+                    </Col> */}
                 </Row>
             </React.Fragment>
         );

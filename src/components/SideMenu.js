@@ -5,7 +5,7 @@ import { Menu,Icon } from 'antd';
 class SideMenu extends Component {
     render() {
         return (
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} style={{marginTop:'50px'}} >
+            <Menu theme="dark" mode="inline"  style={{marginTop:'50px'}} >
           
             <Menu.Item key="1">
               <Link to='/'>
